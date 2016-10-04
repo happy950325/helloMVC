@@ -31,36 +31,30 @@ public class DoRegister extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("euc-kr");
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
-		String name = request.getParameter("name");
-		String gender = request.getParameter("gender");
-		String email = request.getParameter("email");
+		// TODO Auto-generated method stub
+		String id = request.getParameter("id"); 
+		String password = request.getParameter("password"); 
+		String name = request.getParameter("name"); 
+		String gender = request.getParameter("gender"); 
+		String email = request.getParameter("email"); 
+		 		 
 		
-	
-		CustomerService service = (CustomerService) CustomerService.getInstance();
-		Customer customer = service.findCustomer(id);
+		Customer customer = new Customer(id, password, name, gender, email);
 		
-		String page ;
+		CustomerService service = (CustomerService) CustomerService.getInstance();   
+		service.addCustomer(customer);
 		
-      if(customer == null ) {
-    	  
-			service.addCustomer(new Customer(id,password,name,gender,email));
-			customer = service.findCustomer(id);
-			request.setAttribute("customer", customer);
-			page ="view/registerSuccess.jsp";
+		String page = null;
 		
-      }
-		
+		if(id.isEmpty() || password.isEmpty() || name.isEmpty()){
+			page= "/view/error.jsp";
+			request.setAttribute("customer", customer);}
 		else {
-			page ="view/error.jsp";
-		}
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		dispatcher.forward(request,response);
-		
-	}
+			page = "/view/registerSuccess.jsp";
+			request.setAttribute("customer", customer);}
+		RequestDispatcher dispatcher = request.getRequestDispatcher(page); 
+		dispatcher.forward(request, response); 
+
 	}
 
-
+}

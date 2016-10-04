@@ -31,31 +31,29 @@ public class DoLogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("euc-kr");
-		String id = request.getParameter("id");
+		// TODO Auto-generated method stub
+		
+		String id = request.getParameter("id"); 
 		String password = request.getParameter("password");
 		
-		CustomerService service = (CustomerService) CustomerService.getInstance();
-		Customer customer = service.login(id,password);
+		CustomerService service = (CustomerService) CustomerService.getInstance(); 
+		Customer customer = service.login(id,password); 
 		
-		String page;
+		String page=null; 
 		
-		if(customer == null ) {
-			
-			page ="view/loginFail.jsp";
-			request.setAttribute("id", id);
+		if(customer == null){ 
+			page = "/view/loginFail.jsp"; 
+			request.setAttribute("id", id); 
 		}
 		
-		else {
-		
-			page ="view/loginSuccess.jsp";
-			request.setAttribute("customer", customer);
-			
+		else{ 
+			page = "/view/loginSuccess.jsp"; 
+			request.setAttribute("customer", customer); 
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		dispatcher.forward(request,response);
-		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(page); 
+		dispatcher.forward(request, response); 
+
 	}
 
 }

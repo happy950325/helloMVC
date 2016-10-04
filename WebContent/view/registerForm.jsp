@@ -39,8 +39,9 @@ div.ex2 {
 				</tr>
 				<tr>
 					<td>성별</td>
-					<td><input type="radio" name="gender" value="male" />남자 
-					<input type="radio" name="gender" value="female" />여자
+					<td>
+					<input type="radio" name="gender" value="men" />남자
+					<input type="radio" name="gender" value="women" />여자
 					</td>
 				</tr>
 				<tr>
